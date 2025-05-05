@@ -1,13 +1,5 @@
-// https://expressjs.com/
 /*
 In Node-red flow will be composed of inject->function->http request(http://localhost:3000/api/sensor_data/test_sensor)
-Function:
-msg.headers = { "Content-Type": "application/json" };
-msg.payload = {
-    payload: msg.payload,
-    topic: msg.topic
-};
-return msg;
 */
 
 // Import express library
@@ -42,8 +34,17 @@ app.post('/api/sensor_data/:sensor_id', (req, res) => {
     res.send(`Data received for sensor ${sensorId}`);
 });
 
+// Version endpoint for future-proofing
+app.get('/api/get_version', (req, res) => {
+    res.json({
+        version: '1.0.0',
+        build: '2025-05-05'
+    });
+});
+
 // Start the server and send a message to console
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
     console.log(`Try viewing a sensor at: http://localhost:${port}/ui/test_sensor`);
+    console.log(`View the api version at http://localhost:3000/api/get_version`);
 });

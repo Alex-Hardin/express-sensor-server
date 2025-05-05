@@ -7,7 +7,7 @@ module.exports = (sensorData) => {
       const sensorId = req.params.sensor_id;
       const data = sensorData[sensorId];
 
-      // Define the refresh script to be reused whether data available or not
+      // Refresh script to be reused whether data available or not
       const autoRefreshScript = `
           <script>
             setTimeout(() => {
